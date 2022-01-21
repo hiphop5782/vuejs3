@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model example</title>
+    <style>
+        div {
+            margin:20px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        
+        <h1>checkbox</h1>
+        <label>
+            <input type="checkbox" v-model="agree">
+            동의합니다
+        </label>
+
+        <div>확인용 : <input type="text" v-model="agree" readonly></div>
+
+        <h1>radio</h1>
+        <label>
+            <input type="radio" name="fruit" value="딸기" v-model="fruit">딸기
+        </label>
+        <label>
+            <input type="radio" name="fruit" value="사과" v-model="fruit">사과
+        </label>
+        <label>
+            <input type="radio" name="fruit" value="포도" v-model="fruit">포도
+        </label>
+
+        <div>확인용 : <input type="text" v-model="fruit" readonly></div>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    agree:false,
+                    fruit:"딸기",
+                };
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model example</title>
+    <style>
+        input {
+            font-size: 20px;
+            padding: 0.75em;
+            display: block;
+            margin:0.5em 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        
+        <input type="text" v-model="text" v-on:input="text = $event.target.value">
+
+        <div>{{text}}</div>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    text : ""
+                };
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue template example</title>
+    <style>
+        textarea {
+            width: 400px;
+            height:150px;
+            resize: none;
+            font-size: 20px;
+            padding: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        
+        <h1>글자 입력</h1>
+        <textarea v-model="sample" v-on:input="sample = $event.target.value"></textarea>
+        
+        <h2>v-html</h2>
+        <div v-html="sample"></div>
+
+        <h2>v-text</h2>
+        <div v-text="sample"></div>
+        
+        <h2>mustache</h2>
+        <div>{{sample}}</div>
+        
+
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    sample:"", 
+                };
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

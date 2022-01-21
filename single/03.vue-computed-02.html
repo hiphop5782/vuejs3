@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue computed 속성의 필요성</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <label>
+                Nickname
+                <input type="text" v-model="nickname" v-on:input="nickname = $event.target.value">
+            </label>
+        </div>
+        <h5>닉네임 글자 수 : {{nicknameLength}}</h5>
+        <h5>사용 가능 여부 : {{nicknameAvailable}}</h5>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    nickname:""
+                };
+            },
+            computed:{
+                nicknameLength(){
+                    return this.nickname.length;
+                },
+                nicknameAvailable(){
+                    return this.nickname.length >= 2 && this.nickname.length <= 6;
+                }
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

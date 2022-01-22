@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue computed getter/setter</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            Email : 
+            <input type="text" v-model="email">
+        </div>
+        <h5>설정된 이메일 : {{email}}</h5>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    emailPrefix:"",
+                    emailSuffix:""
+                };
+            },
+            computed:{
+                email:{
+                    get(){
+                        if(this.emailPrefix && this.emailSuffix){
+                            return this.emailPrefix + "@" + this.emailSuffix;
+                        }
+                        else{
+                            return "";
+                        }
+                    },
+                    set(email){
+                        const idx = email.indexOf("@");
+                        if(idx < 0) {
+                            return;
+                        }
+
+                        this.emailPrefix = email.substring(0, idx);
+                        this.emailSuffix = email.substring(idx + 1);
+                    }
+                },
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

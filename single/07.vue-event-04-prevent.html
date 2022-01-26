@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue event</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>기본이벤트 방지 미설정</h1>
+        <form action="https://www.google.com/search" method="get" v-on:submit="testFunction">
+            <input type="text" name="q" placeholder="검색어 입력">
+            <button type="submit">검색</button>
+        </form>
+
+        <h1>기본이벤트 방지 설정</h1>
+        <form action="https://www.google.com/search" method="get" v-on:submit.prevent="testFunction">
+            <input type="text" name="q" placeholder="검색어 입력">
+            <button type="submit">검색</button>
+        </form>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            methods: {
+                testFunction() {
+                    window.alert("testFunction 실행");
+                }
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

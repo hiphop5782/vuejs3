@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue event</title>
+    <style>
+        .result {
+            height: 50px;
+        }        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="data1" v-on:input="data2 = $event.target.value">
+        
+        <h1>v-model</h1>
+        <div class="result" v-text="data1"></div>
+        
+        <h1>v-on:input</h1>
+        <div class="result" v-text="data2"></div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    data1:"",
+                    data2:"",
+                };
+            },
+        });
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

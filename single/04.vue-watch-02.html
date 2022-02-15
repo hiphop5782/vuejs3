@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue deep watch</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        textarea{
+            resize: none;
+            padding:0.5em;
+        }
+        input{
+            padding:0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <label>
+            title<br>
+            <input type="text" v-model="board.title">
+        </label>
+        <br><br>
+
+        <label>
+            content<br>
+            <textarea v-model="board.content" cols="50" rows="5"></textarea>
+        </label>
+        <br><br>
+        revision count : {{revision}}
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    board:{
+                        title:"Welcome to Vue JS 3!",
+                        content:"VueJS는 사용자 인터페이스를 만들기 위한 progressive framework 입니다."
+                    },
+                    revision:0
+                };
+            },
+            watch:{
+                // not working
+                board:function(){
+                    this.revision++;
+                }
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue event</title>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="testFunction">호출 방식 1</button>
+        <button v-on:click="testFunction()">호출 방식 2</button>
+        <button v-on:click="testFunction($event)">호출 방식 3</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            methods: {
+                testFunction() {
+                    console.log(arguments, arguments.length);
+                    window.alert("testFunction 실행");
+                }
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

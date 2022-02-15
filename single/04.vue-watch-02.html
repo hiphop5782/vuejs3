@@ -49,8 +49,17 @@
             },
             watch:{
                 // not working
-                board:function(){
-                    this.revision++;
+                // board:function(){
+                //     this.revision++;
+                // },
+
+                // deep watch
+                board:{
+                    deep:true,
+                    //immediate:true,
+                    handler(){
+                        this.revision++;
+                    }
                 }
             }
         });

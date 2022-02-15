@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Directive Example</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .paragraph > h1 {
+            font-size: 2em;
+        }
+        .paragraph > p {
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>VueJS bind style example</h2>
+        <button v-on:click="increase">크게</button>
+        <button v-on:click="decrease">작게</button>
+        <div class="paragraph" :style="{'font-size':fontSize+'px'}">
+            <h1>Lorem ipsum</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt luctus ipsum, non malesuada elit convallis nec. Donec cursus augue convallis, feugiat tortor eget, mattis sapien. Mauris dignissim a risus sed mattis. In arcu eros, ultricies quis feugiat ut, ultricies quis massa. Mauris quis elit feugiat, consectetur felis ut, efficitur sem. Curabitur ultricies porta lectus ut ornare. Duis nec lobortis neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac iaculis nibh, non pharetra lectus. Pellentesque sit amet dolor id magna ultrices varius non vitae lectus. Curabitur nec viverra nisi, ac molestie mi. Curabitur vulputate fringilla erat, eu feugiat sem consectetur non. Mauris erat arcu, maximus at porttitor sit amet, maximus et ex. Duis mollis ornare lacus eget elementum. Aliquam at velit vitae arcu viverra pretium a vitae neque. Nullam volutpat, augue at dictum facilisis, turpis nibh ultrices justo, sit amet commodo sapien quam a nisl.
+            </p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    fontSize:10,
+                };
+            },
+            methods:{
+                increase(){
+                    if(this.fontSize < 30){
+                        this.fontSize++;
+                    }
+                },
+                decrease(){
+                    if(this.fontSize > 5){
+                        this.fontSize--;
+                    }
+                },
+            }
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

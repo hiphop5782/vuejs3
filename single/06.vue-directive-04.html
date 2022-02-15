@@ -8,9 +8,11 @@
 </head>
 <body>
     <div id="app">
-        <h1>비밀번호 입력</h1>
-        <input v-bind:type="type" v-model="password">
-        <input type="checkbox" v-model="visible"> 비밀번호 표시
+        <h1>닉네임 입력</h1>
+        <p>닉네임은 한글 2~10자 이내로 작성하세요</p>
+        <input type="text" v-model="nickname" v-on:input="nickname = $event.target.value">
+        <br><br>
+        <button v-bind:disabled="invalidNickname">다음 단계로</button>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
@@ -18,13 +20,12 @@
         const app = Vue.createApp({
             data(){
                 return {
-                    password:"",
-                    visible:false,
+                    nickname:"",
                 };
             },
             computed:{
-                type(){
-                    return this.visible ? "text" : "password";
+                invalidNickname(){
+                    return !/[가-힣]{2,10}/.test(this.nickname);
                 },
             }
         });

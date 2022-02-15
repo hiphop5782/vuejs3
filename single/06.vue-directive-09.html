@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Directive Example</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .correct {
+            color: blue;
+            display: none;
+        }
+        .incorrect {
+            color:red;
+            display: none;
+        }
+        .correct.active,
+        .incorrect.active {
+            display: block;
+        }        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>VueJS bind style example</h2>
+        <h3>아이디 입력</h3>
+        <input type="text" v-model="id">
+        <div class="correct" v-bind:class="{active : idCorrect}">
+            올바른 아이디 형식입니다.
+        </div>
+        <div class="incorrect" v-bind:class="{active : idIncorrect}">
+            아이디는 영문 소문자 또는 숫자 8~20자로 작성해 주세요.
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    id:"",
+                };
+            },
+            computed:{
+                idIsEmpty(){
+                    return this.id == "";
+                },
+                idAvaliable(){
+                    return /[a-z][a-z0-9]{7,19}/.test(this.id);
+                },
+                idCorrect(){
+                    return !this.idIsEmpty && this.idAvaliable;
+                },
+                idIncorrect(){
+                    return !this.idIsEmpty && !this.idAvaliable;
+                },
+            },
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

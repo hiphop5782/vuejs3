@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Directive Example</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        #app {
+            position:fixed;
+            left:50%;
+            transform:translate(-50%, 0%);
+            margin-top: 30px;
+            width:300px;
+        }
+        #app input,
+        #app button {
+            width:100%;
+            padding:10px;
+            margin:10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>VueJS v-if example</h2>
+        <div>
+            <h3>회원 가입 1단계 : 아이디 입력</h3>
+            <input type="text" v-model="member.id">
+        </div>
+        <div v-if="level1">
+            <h3>회원 가입 2단계 : 닉네임 입력</h3>
+            <input type="text" v-model="member.nickname">
+        </div>
+        <div v-if="level2">
+            <h3>회원 가입 3단계 : 이메일 입력</h3>
+            <input type="text" v-model="member.email">
+        </div>
+        <button v-if="level3">
+            제출하기
+        </button>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    member:{
+                        id:"",
+                        nickname:"",
+                        email:"",
+                    },
+                };
+            },
+            computed:{
+                level1(){//아이디만 입력된 상태
+                    return this.member.id.length > 0;
+                },
+                level2(){//아이디+닉네임이 입력된 상태
+                    return this.level1 && this.member.nickname.length > 0;
+                },
+                level3(){//아이디+닉네임+이메일이 모두 입력된 상태
+                    return this.level2 && this.member.email.length > 0;
+                },
+            },
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

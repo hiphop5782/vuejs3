@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue for loop</title>
+</head>
+<body>
+    <div id="app">
+        <input v-model="inputData">
+        <button v-on:click="addData">추가</button>
+
+        <div v-for="(data, index) in dataList" v-bind:key="index">
+            {{index}} : <input type="text" v-model="dataList[index]">
+            <button v-on:click="removeData(index);">삭제</button>
+        </div>
+
+        <button v-on:click="sortData">정렬</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    inputData:"",
+                    dataList:[10, 20, 30, 40, 50],
+                };
+            },
+            methods:{
+                //등록 메소드
+                addData(){
+                    if(!this.inputData) return;
+                    this.dataList.push(this.inputData);
+                    this.inputData = "";
+                },
+                //삭제 메소드
+                removeData(index){
+                    this.dataList.splice(index, 1);
+                },
+                //정렬 메소드
+                sortData(){
+                    // this.dataList.sort();//오름차순(기본)
+                    this.dataList.sort((a,b)=>b-a);//내림차순
+                },
+            },
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>

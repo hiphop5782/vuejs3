@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue for loop</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputData.name">
+        <input type="number" v-model.number="inputData.score">
+        <button v-on:click="addData">등록</button>
+        <div v-for="(data, index) in dataList" v-bind:key="index">
+            순서 : {{index}}, 
+            이름 : <input type="text" v-model="data.name">,
+            점수 : <input type="number" v-model.number="data.score">점
+            <button v-on:click="removeData(index);">삭제</button>
+        </div>
+        <button v-on:click="sortDataAsc">오름차순</button>
+        <button v-on:click="sortDataDesc">내림차순</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    inputData:{
+                        name:"",
+                        score:0,
+                        clear(){
+                            this.name = "";
+                            this.score = 0;
+                        },
+                        get isNameValid(){
+                            return this.name.length > 0;
+                        },
+                        get isScoreValid(){
+                            return this.score >= 0 && this.score <= 100;
+                        },
+                        get isDataValid(){
+                            return this.isNameValid && this.isScoreValid;
+                        },
+                        get copy(){
+                            return Object.assign({}, this);
+                        },
+                    },
+                    dataList:[
+                        {name:"피카츄", score:80},
+                        {name:"라이츄", score:70},
+                        {name:"파이리", score:60},
+                        {name:"꼬부기", score:80},
+                        {name:"버터플", score:65}
+                    ],
+                };
+            },
+            methods:{
+                addData(){
+                    if(this.inputData.isDataValid) {
+                        this.dataList.push(this.inputData.copy);
+                        this.inputData.clear();
+                    }
+                },
+                removeData(index){
+                    this.dataList.splice(index, 1);
+                },
+                sortDataAsc(){
+                    this.dataList.sort((a,b)=>a.score-b.score);
+                },
+                sortDataDesc(){
+                    this.dataList.sort((a,b)=>b.score-a.score);
+                },
+            },
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>
